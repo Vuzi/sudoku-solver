@@ -1,0 +1,23 @@
+c:\users\vuzi\documents\visual studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Release\SudokuValidator.exe.config
+c:\users\vuzi\documents\visual studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Release\SudokuValidator.exe
+c:\users\vuzi\documents\visual studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Release\SudokuValidator.pdb
+c:\users\vuzi\documents\visual studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\obj\Release\SudokuValidator.exe
+c:\users\vuzi\documents\visual studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\obj\Release\SudokuValidator.pdb
+C:\Users\Vuzi\Documents\visual studio 2013\Projects\Sudoku\SudokuValidator\bin\Release\SudokuValidator.exe.config
+C:\Users\Vuzi\Documents\visual studio 2013\Projects\Sudoku\SudokuValidator\obj\Release\SudokuValidator.exe
+C:\Users\Vuzi\Documents\visual studio 2013\Projects\Sudoku\SudokuValidator\obj\Release\SudokuValidator.pdb
+C:\Users\Vuzi\Documents\visual studio 2013\Projects\Sudoku\SudokuValidator\bin\Release\SudokuValidator.exe
+C:\Users\Vuzi\Documents\visual studio 2013\Projects\Sudoku\SudokuValidator\bin\Release\SudokuValidator.pdb
+C:\Users\Vuzi\Documents\visual studio 2013\Projects\Sudoku\SudokuValidator\obj\Release\SudokuValidator.csprojResolveAssemblyReference.cache
+C:\Dropbox\Cours\4a\C#\Projet 1\SudokuValidator\src\Sudoku\SudokuValidator\bin\Release\SudokuValidator.exe.config
+C:\Dropbox\Cours\4a\C#\Projet 1\SudokuValidator\src\Sudoku\SudokuValidator\obj\Release\SudokuValidator.exe
+C:\Dropbox\Cours\4a\C#\Projet 1\SudokuValidator\src\Sudoku\SudokuValidator\obj\Release\SudokuValidator.pdb
+C:\Dropbox\Cours\4a\C#\Projet 1\SudokuValidator\src\Sudoku\SudokuValidator\bin\Release\SudokuValidator.exe
+C:\Dropbox\Cours\4a\C#\Projet 1\SudokuValidator\src\Sudoku\SudokuValidator\bin\Release\SudokuValidator.pdb
+C:\Dropbox\Cours\4a\C#\Projet 1\SudokuValidator\src\Sudoku\SudokuValidator\obj\Release\SudokuValidator.csprojResolveAssemblyReference.cache
+C:\Users\Vuzi\Desktop\Sudoku\SudokuValidator\bin\Release\SudokuValidator.exe.config
+C:\Users\Vuzi\Desktop\Sudoku\SudokuValidator\obj\Release\SudokuValidator.exe
+C:\Users\Vuzi\Desktop\Sudoku\SudokuValidator\obj\Release\SudokuValidator.pdb
+C:\Users\Vuzi\Desktop\Sudoku\SudokuValidator\obj\Release\SudokuValidator.csprojResolveAssemblyReference.cache
+C:\Users\Vuzi\Desktop\Sudoku\SudokuValidator\bin\Release\SudokuValidator.exe
+C:\Users\Vuzi\Desktop\Sudoku\SudokuValidator\bin\Release\SudokuValidator.pdb

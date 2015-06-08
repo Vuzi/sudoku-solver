@@ -25,3 +25,6 @@ C:\Users\Vuzi\Desktop\Sudoku\SudokuValidator\bin\Debug\SudokuValidator.pdb
 C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\bin\Debug\SudokuValidator.exe.config
 C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\obj\Debug\SudokuValidator.exe
 C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\obj\Debug\SudokuValidator.pdb
+C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\bin\Debug\SudokuValidator.exe
+C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\bin\Debug\SudokuValidator.pdb
+C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\obj\Debug\SudokuValidator.csprojResolveAssemblyReference.cache

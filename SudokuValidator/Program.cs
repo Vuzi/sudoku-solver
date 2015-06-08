@@ -97,28 +97,38 @@ namespace ConsoleApplication {
 
             if(Options.solve) {
                 foreach (Sudoku sudoku in sudokus) {
-                    sudoku.DebugDisplaySudoku();
+
+                    if (Options.show)
+                        sudoku.DisplaySudoku();
+
                     watch.Restart();
                     var valid = sudoku.Solve();
                     watch.Stop();
 
                     ticks += watch.ElapsedTicks;
-                        
+
                     if (valid) {
-                        if(sudoku.Validate() != null)
+                        if (sudoku.Validate() != null)
                             Console.WriteLine(sudoku.name + " can't be solved : error while solving it");
-                        else
+                        else {
                             Console.WriteLine(sudoku.name + " is solved");
+
+                            if (Options.show)
+                                sudoku.DisplaySudoku();
+                        }
                     } else {
                         Console.WriteLine(sudoku.name + " can't be solved");
                     }
-                    Console.ReadLine();
                 }
 
                 if (Options.verbose)
                     Console.WriteLine(String.Format("Resolution of {0} sudoku(s) in {1:0.0000}ms", sudokus.Count, (double)ticks/Stopwatch.Frequency * 1000));
             } else {
                 foreach (Sudoku sudoku in sudokus) {
+
+                    if (Options.show)
+                        sudoku.DisplaySudoku();
+
                     watch.Restart();
                     var valid = sudoku.Validate();
                     watch.Stop();
@@ -136,6 +146,7 @@ namespace ConsoleApplication {
                 if (Options.verbose)
                     Console.WriteLine(String.Format("Validation of {0} sudoku(s) in {1:0.0000}ms", sudokus.Count, (double)ticks/Stopwatch.Frequency * 1000));
             }
+            Console.ReadLine();
         }
     }
 

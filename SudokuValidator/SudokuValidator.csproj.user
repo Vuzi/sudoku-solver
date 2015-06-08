@@ -3,4 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartArguments>solve -v test2.sud</StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartArguments>solve -v test2.sud</StartArguments>
+  </PropertyGroup>
 </Project>

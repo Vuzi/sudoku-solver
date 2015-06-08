@@ -268,7 +268,7 @@ namespace ConsoleApplication {
         /// <summary>
         /// Display the sudoku in the console
         /// </summary>
-        public void DebugDisplaySudoku() {
+        public void DisplaySudoku() {
             Console.WriteLine("Name : " + name);
             Console.WriteLine("Date : " + date);
             Console.WriteLine("Dictionnary : " + dictionnary);
@@ -282,6 +282,13 @@ namespace ConsoleApplication {
                 }
                 Console.WriteLine();
             }
+        }
+
+        /// <summary>
+        /// Display the sudoku in the console
+        /// </summary>
+        public void DebugDisplaySudoku() {
+            DisplaySudoku();
             Console.WriteLine("Sudoku values : ");
 
             for (int i = 0; i < dictionnary.Length; i++) {

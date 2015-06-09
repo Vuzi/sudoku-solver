@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices; 
 
 namespace ConsoleApplication {
 
@@ -107,6 +108,14 @@ namespace ConsoleApplication {
             }
         }
 
+        private void UpdateSudoku() {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    sudoku[i, j] = correspondances[sudokuValues[i, j]];
+                }
+            }
+        }
+
         /// <summary>
         /// Valite the current sudoku
         /// </summary>
@@ -183,17 +192,36 @@ namespace ConsoleApplication {
         /// </summary>
         /// <returns>True if the sudoku can be (and is) solved, false otherwise</returns>
         public bool Solve() {
+            // Init possible values for lines, columns and squares
+            this.lines = new uint[size];
+            this.cols = new uint[size];
+            this.squares = new uint[size];
+
+            for (int i = 0; i < size; i++) {
+                lines[i] = 0x0;
+                cols[i] = 0x0;
+                squares[i] = 0x0;
+
+                for (int j = 0; j < size; j++) {
+                    lines[i] |= sudokuValues[i, j];
+                    cols[i] |= sudokuValues[j, i];
+                    squares[i] |= sudokuValues[(i / squareSize) * squareSize + j / squareSize, i * squareSize % size + j % squareSize];
+                }
+
+                lines[i] ^= controlSum;
+                cols[i] ^= controlSum;
+                squares[i] ^= controlSum;
+            }
+
             // Try the speed method
-            if (SolveSpeed())
+            if (SolveSpeed()) {
+                UpdateSudoku();
                 return true;
+            }
 
             // Try with hypothesis
             if (SolveInternal(0, 0)) {
-                for (int i = 0; i < size; i++) {
-                    for (int j = 0; j < size; j++) {
-                        sudoku[i, j] = correspondances[sudokuValues[i, j]];
-                    }
-                }
+                UpdateSudoku();
                 return true;
             } else
                 return false;
@@ -216,11 +244,17 @@ namespace ConsoleApplication {
                 for (int x = 0; x < size; x++) {
                     for (int y = 0; y < size; y++) {
                         if (sudokuValues[x, y] == 0) {
-                            uint value = GetPossibleValuesAtInternal(x, y);
+                            uint value = lines[x] & cols[y] & squares[((x / squareSize) * squareSize) + (y / squareSize)];
 
-                            // If value is solved, add it
+                            // Solved
                             if ((value & (value - 1)) == 0) {
+                                // Update value
                                 sudokuValues[x, y] = value;
+
+                                // Update possible values
+                                lines[x] ^= value;
+                                cols[y] ^= value;
+                                squares[((x / squareSize) * squareSize) + (y / squareSize)] ^= value;
                             } else
                                 unsolved++;
                         }
@@ -247,16 +281,35 @@ namespace ConsoleApplication {
                     return true; // Sudoku completed
             }
 
-            if (sudokuValues[x, y] != 0) // Value already present
+            if (sudokuValues[x, y] != 0x0) // Value already present
                 return SolveInternal(x + 1, y);
 
+            int squarePos = ((x / squareSize) * squareSize) + (y / squareSize);
+            uint value = lines[x] & cols[y] & squares[squarePos];
+
+            // Test if no possible value
+            if (value == 0x0)
+                return false;
+
             // Test recursively with each possible value
-            uint value = GetPossibleValuesAtInternal(x, y);
-            for (uint i = maxValue; i > 0; i >>= 1) {
+            for (uint i = 0x1; i <= maxValue; i <<= 1) {
                 if ((value & i) == i) {
+                    // Update value
                     sudokuValues[x, y] = i;
-                    if (SolveInternal(x + 1, y))
-                        return true;
+
+                    // Update possible values
+                    lines[x] ^= i;
+                    cols[y] ^= i;
+                    squares[squarePos] ^= i;
+
+                    if (SolveInternal(x + 1, y)) {
+                        return true; // Solution working, quit
+                    } else {
+                        // Revert
+                        lines[x] |= i;
+                        cols[y] |= i;
+                        squares[squarePos] |= i;
+                    }
                 }
             }
 
@@ -371,5 +424,9 @@ namespace ConsoleApplication {
 
             return loadedSudokus;
         }
+
+        public uint[] lines { get; set; }
+        public uint[] cols { get; set; }
+        public uint[] squares { get; set; }
     }
 }

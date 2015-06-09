@@ -109,16 +109,18 @@ namespace ConsoleApplication {
 
                     if (valid) {
                         if (sudoku.Validate() != null)
-                            Console.WriteLine(sudoku.name + " can't be solved : error while solving it");
-                        else {
-                            Console.WriteLine(sudoku.name + " is solved");
+                            Console.Write(sudoku.name + " can't be solved : error while solving it");
+                        else
+                            Console.Write(sudoku.name + " is solved");
+                    } else
+                        Console.Write(sudoku.name + " can't be solved");
 
-                            if (Options.show)
-                                sudoku.DisplaySudoku();
-                        }
-                    } else {
-                        Console.WriteLine(sudoku.name + " can't be solved");
-                    }
+                    if (Options.verbose)
+                        Console.Write(String.Format(" in {0:0.0000}ms", watch.Elapsed.Milliseconds));
+                    Console.WriteLine();
+
+                    if (Options.show)
+                        sudoku.DisplaySudoku();
                 }
 
                 if (Options.verbose)
@@ -136,11 +138,14 @@ namespace ConsoleApplication {
                     ticks += watch.ElapsedTicks;
                         
                     if (valid == null) {
-                        Console.WriteLine(sudoku.name + " is valid");
+                        Console.Write(sudoku.name + " is valid");
                     } else {
-                        Console.WriteLine(sudoku.name + " is not valid : " + valid.error + " at " + valid.nb);
+                        Console.Write(sudoku.name + " is not valid : " + valid.error + " at " + valid.nb);
                     }
 
+                    if (Options.verbose)
+                        Console.Write(String.Format(" in {0:0.0000}ms", watch.Elapsed.Milliseconds));
+                    Console.WriteLine();
                 }
 
                 if (Options.verbose)

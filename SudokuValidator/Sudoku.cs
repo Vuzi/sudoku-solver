@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading.Tasks;
-using System.Runtime.CompilerServices; 
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography; 
 
 namespace ConsoleApplication {
 
@@ -55,6 +56,32 @@ namespace ConsoleApplication {
         private uint maxValue;
 
         /// <summary>
+        /// Generated sudoku constructor 
+        /// </summary>
+        /// <param name="name">The name of the sudoku</param>
+        /// <param name="date">The date of the sudoku</param>
+        /// <param name="dictionnary">The dictionnary (all the possible values)</param>
+        public Sudoku(string name, DateTime date, String dictionnary, int difficulity=10, char jocker = '.') {
+            // Create an empty sudoku
+            char[,] sudoku = new char[dictionnary.Length, dictionnary.Length];
+
+            for (int i = 0; i < dictionnary.Length; i++) {
+                for (int j = 0; j < dictionnary.Length; j++) {
+                    sudoku[i, j] = jocker; // Empty value
+                }
+            }
+
+            // Initialize
+            this.InitSudoku(name, date, dictionnary, sudoku, jocker);
+
+            // Generate & remove values
+            this.Generate();
+            this.Sparse(difficulity);
+
+            this.UpdateSudoku();
+        }
+
+        /// <summary>
         /// Sudoku constructor 
         /// </summary>
         /// <param name="name">The name of the sudoku</param>
@@ -62,6 +89,17 @@ namespace ConsoleApplication {
         /// <param name="dictionnary">The dictionnary (all the possible values)</param>
         /// <param name="sudoku">The sudoku itself</param>
         public Sudoku(string name, DateTime date, String dictionnary, char[,] sudoku, char jocker='.') {
+            this.InitSudoku(name, date, dictionnary, sudoku, jocker);
+        }
+
+        /// <summary>
+        /// Initialize the sudoku
+        /// </summary>
+        /// <param name="name">The name of the sudoku</param>
+        /// <param name="date">The date of the sudoku</param>
+        /// <param name="dictionnary">The dictionnary (all the possible values)</param>
+        /// <param name="sudoku">The sudoku itself</param>
+        private void InitSudoku(string name, DateTime date, String dictionnary, char[,] sudoku, char jocker) {
             this.name = name;
             this.date = date;
             this.dictionnary = dictionnary;
@@ -73,10 +111,10 @@ namespace ConsoleApplication {
             // The sudoku size must be a perfect square
             if (Math.Sqrt(dictionnary.Length) % 1 != 0 || dictionnary.Length != sudoku.GetLength(0))
                 throw new Exception(String.Format("Error : invalid sudoku size {0}", dictionnary.Length));
-            
+
             this.size = dictionnary.Length;
-            this.squareSize = (int) Math.Sqrt(dictionnary.Length);
-            this.controlSum = (uint) ~(0xFFFFFFFF << this.size);
+            this.squareSize = (int)Math.Sqrt(dictionnary.Length);
+            this.controlSum = (uint)~(0xFFFFFFFF << this.size);
             this.maxValue = (uint)Math.Pow(2, this.size);
 
             // Init corresponding values
@@ -84,7 +122,7 @@ namespace ConsoleApplication {
             int size = dictionnary.Length;
 
             this.jocker = jocker;
-            this.correspondances = new Dictionary<uint,char>();
+            this.correspondances = new Dictionary<uint, char>();
             for (int i = 0; i < size; i++)
                 correspondances.Add(value << i, dictionnary[i]);
 
@@ -108,11 +146,115 @@ namespace ConsoleApplication {
             }
         }
 
+        /// <summary>
+        /// Update the values of the sudoku, according to the values of correspondances.
+        /// </summary>
         private void UpdateSudoku() {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
-                    sudoku[i, j] = correspondances[sudokuValues[i, j]];
+                    if (sudokuValues[i, j] != 0x0)
+                        sudoku[i, j] = correspondances[sudokuValues[i, j]];
+                    else
+                        sudoku[i, j] = this.jocker;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Generate the sudoku. Should only be called on an empty sudoku
+        /// </summary>
+        private void Generate() {
+            this.InitSolver();
+            this.GenerateInternal(0, 0);
+        }
+
+        /// <summary>
+        /// Recursively generate the sudoku. Should only be called on an empty sudoku
+        /// </summary>
+        /// <param name="x">The x position to generate from</param>
+        /// <param name="y">The y position to generate from</param>
+        /// <returns>True if the sudoku could be generate from the specified position, false otherwise</returns>
+        private bool GenerateInternal(int x, int y) {
+
+            if (x >= size) {
+                x = 0;
+                y++;
+
+                if (y >= size)
+                    return true; // Sudoku completed
+            }
+
+            if (sudokuValues[x, y] != 0x0) // Value already present
+                return SolveInternal(x + 1, y);
+
+            int squarePos = ((x / squareSize) * squareSize) + (y / squareSize);
+            uint value = lines[x] & cols[y] & squares[squarePos];
+
+            // Test if no possible value
+            if (value == 0x0)
+                return false;
+
+            // Generate all the possible values & shuffle
+            uint[] values = new uint[this.size];
+
+            int pos = 0;
+            for (uint i = 0x1; i < maxValue; i <<= 1, pos++) {
+                values[pos] = i;
+            }
+
+            Random rnd = new Random();
+            values.OrderBy(a => rnd.Next());
+
+            // Test recursively with each possible value
+            foreach (uint i in values) {
+                if ((value & i) == i) {
+                    // Update value
+                    sudokuValues[x, y] = i;
+
+                    // Update possible values
+                    lines[x] ^= i;
+                    cols[y] ^= i;
+                    squares[squarePos] ^= i;
+
+                    if (SolveInternal(x + 1, y)) {
+                        return true; // Solution working, quit
+                    }
+
+                    // Revert
+                    lines[x] |= i;
+                    cols[y] |= i;
+                    squares[squarePos] |= i;
+                }
+            }
+
+            // No result found, revert
+            sudokuValues[x, y] = 0x0;
+            return false;
+        }
+
+        /// <summary>
+        /// Set some randomly found values to zero in the sudoku. 
+        /// </summary>
+        private void Sparse(int difficulty) {
+            // 1 = 5%
+            // 2 = 10% etc..
+
+            if (difficulty > 5)
+                difficulty = 5; // Max to 50%
+
+            difficulty *= 5;
+            int toRemove = (this.size * this.size * difficulty) / 100;
+            Random rnd = new Random();
+
+            for (int i = 0; i < toRemove; i++) {
+                // Get a random x/y
+                int x = rnd.Next(this.size);
+                int y = rnd.Next(this.size);
+
+                if (sudokuValues[x, y] != 0x0)
+                    sudokuValues[x, y] = 0x0;
+                else
+                    i--; // Retry
             }
         }
 
@@ -186,12 +328,9 @@ namespace ConsoleApplication {
         }
 
         /// <summary>
-        /// Solve the sudoku. This methods will try to solve the sudoku using trivial
-        /// values, and switch to hypothesis tests when no more solutions could be found.
-        /// If still no solution are found, the sudoku is likely to be invalid.
+        /// Init the utils values for the solver and the generator
         /// </summary>
-        /// <returns>True if the sudoku can be (and is) solved, false otherwise</returns>
-        public bool Solve() {
+        private void InitSolver() {
             // Init possible values for lines, columns and squares
             this.lines = new uint[size];
             this.cols = new uint[size];
@@ -212,6 +351,16 @@ namespace ConsoleApplication {
                 cols[i] ^= controlSum;
                 squares[i] ^= controlSum;
             }
+        }
+
+        /// <summary>
+        /// Solve the sudoku. This methods will try to solve the sudoku using trivial
+        /// values, and switch to hypothesis tests when no more solutions could be found.
+        /// If still no solution are found, the sudoku is likely to be invalid.
+        /// </summary>
+        /// <returns>True if the sudoku can be (and is) solved, false otherwise</returns>
+        public bool Solve() {
+            this.InitSolver();
 
             // Try the speed method
             if (SolveSpeed()) {
@@ -292,7 +441,7 @@ namespace ConsoleApplication {
                 return false;
 
             // Test recursively with each possible value
-            for (uint i = 0x1; i <= maxValue; i <<= 1) {
+            for (uint i = 0x1; i < maxValue; i <<= 1) {
                 if ((value & i) == i) {
                     // Update value
                     sudokuValues[x, y] = i;
@@ -372,7 +521,7 @@ namespace ConsoleApplication {
         }
 
         /// <summary>
-        /// Init the sudoku from a file
+        /// Factory that read sudoku from files
         /// </summary>
         /// <param name="path">The file path</param>
         /// <returns>The array of created sudoku</returns>

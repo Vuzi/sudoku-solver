@@ -7,7 +7,7 @@
     <ProjectGuid>{0EBE67B3-2191-4D43-939B-AE40219D903E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sudoku</RootNamespace>
+    <RootNamespace>SudokuSolver</RootNamespace>
     <AssemblyName>Sudoku</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -53,10 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\Cases\Case.cs" />
-    <Compile Include="Classes\Grid.cs" />
-    <Compile Include="Classes\Cases\MutableCase.cs" />
-    <Compile Include="Classes\SudokuSpliter.cs" />
+    <Compile Include="Classes\Sudoku.cs" />
     <Compile Include="ResolutionWindow.xaml.cs">
       <DependentUpon>ResolutionWindow.xaml</DependentUpon>
     </Compile>
@@ -104,6 +101,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

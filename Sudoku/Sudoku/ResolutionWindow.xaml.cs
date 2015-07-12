@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Sudoku
+namespace SudokuSolver
 {
     /// <summary>
     /// Logique d'interaction pour ResolutionWindow.xaml
@@ -30,37 +30,14 @@ namespace Sudoku
             var openFileDialog = new Microsoft.Win32.OpenFileDialog() { Filter = "Sudoku Files (*.sud, *.sudoku)|*.sud;*.sudoku|Text Files (*.txt)|*.txt|All Files (*.*)|*.*" };
             var result = openFileDialog.ShowDialog();
 
-            if (result != false)
+            List<Sudoku> sudokuList = Sudoku.InitFromFile(openFileDialog.FileName);
+
+            foreach (Sudoku sudoku in sudokuList)
             {
-                // TODO Appel de la méthode de parsing du fichier
-                // TODO Remplissage de la DataGrid
-
-                Grid[] grids = new SudokuSpliter().split(openFileDialog.FileName);
-
-                foreach (Grid g in grids)
-                {
-                    //g.printGrid();
-
-                    //if (g.IsValid)
-                    //{
-                    //    Console.WriteLine("Grid " + g.Name + " is valid");
-                    //}
-                    //else
-                    //{
-                    //    Console.WriteLine("Grid " + g.Name + " isn't valid");
-                    //}
-                    Console.WriteLine();
-                    //Console.WriteLine("before");
-                    //g.printGrid();
-                    g.resolve();
-                    Console.WriteLine();
-                    //Console.WriteLine("after");
-                    g.printGrid();
-                    Console.WriteLine();
-                    //Console.WriteLine( g.validate() );
-                    Console.WriteLine();
-                }
+                sudoku.Solve();
+                sudoku.DisplaySudoku();
             }
+            
         }
     }
 }

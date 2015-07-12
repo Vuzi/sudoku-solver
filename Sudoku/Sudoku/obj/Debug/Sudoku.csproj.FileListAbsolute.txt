@@ -17,9 +17,8 @@ D:\DEV\GIT\sudoku\Sudoku\Sudoku\bin\Debug\Sudoku.exe.config
 D:\DEV\GIT\sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.exe
 D:\DEV\GIT\sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\bin\Debug\Sudoku.exe.config
-D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.exe
-D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
-D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.csprojResolveAssemblyReference.cache
+D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\bin\Debug\Sudoku.exe
+D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\bin\Debug\Sudoku.pdb
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\MainWindow.baml
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\ResolutionWindow.baml
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\MainWindow.g.cs
@@ -27,7 +26,9 @@ D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\ResolutionWindow.g.cs
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\App.g.cs
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku_MarkupCompile.cache
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.g.resources
-D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.Cache
-D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\bin\Debug\Sudoku.exe
-D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\bin\Debug\Sudoku.pdb
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\SudokuSolver.Properties.Resources.resources
+D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.Cache
+D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.exe
+D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
+D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\TestWPF.baml
+D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\TestWPF.g.cs

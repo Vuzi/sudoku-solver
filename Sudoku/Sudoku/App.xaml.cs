@@ -13,5 +13,11 @@ namespace SudokuSolver
     /// </summary>
     public partial class App : Application
     {
+        public static SudokuViewModel ViewModelSudoku { get; set; }
+
+        static App()
+        {
+            ViewModelSudoku = new SudokuViewModel();
+        }
     }
 }

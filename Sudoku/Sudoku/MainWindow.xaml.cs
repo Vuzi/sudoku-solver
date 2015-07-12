@@ -41,6 +41,12 @@ namespace SudokuSolver
             {
                 MessageBox.Show(((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString());
             }
+            else if (((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString().Equals("Test WPF"))
+            {
+                TestWPF twpf = new TestWPF();
+                twpf.Show();
+                this.Hide();
+            }
         }
     }
 }

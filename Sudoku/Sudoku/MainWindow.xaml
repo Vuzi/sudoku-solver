@@ -10,6 +10,7 @@
             <ComboBoxItem Content="Générer un Sudoku"/>
             <ComboBoxItem Content="Résoudre un Sudoku"/>
             <ComboBoxItem Content="Vérifier un Sudoku"/>
+            <ComboBoxItem Content="Test WPF"/>
         </ComboBox>
 
     </Grid>

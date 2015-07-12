@@ -28,3 +28,6 @@ C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\obj\Debug\SudokuValidator.pdb
 C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\bin\Debug\SudokuValidator.exe
 C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\bin\Debug\SudokuValidator.pdb
 C:\Dropbox\GitHub\sudoku-solver\SudokuValidator\obj\Debug\SudokuValidator.csprojResolveAssemblyReference.cache
+D:\DEV\GIT\sudoku-solver\SudokuValidator\bin\Debug\SudokuValidator.exe.config
+D:\DEV\GIT\sudoku-solver\SudokuValidator\obj\Debug\SudokuValidator.exe
+D:\DEV\GIT\sudoku-solver\SudokuValidator\obj\Debug\SudokuValidator.pdb

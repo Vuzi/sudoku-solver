@@ -272,7 +272,7 @@ namespace ConsoleApplication {
         /// <param name="y">The y position to solve from</param>
         /// <returns>True if the sudoku can be solved from the specified position, false otherwise</returns>
         private bool SolveInternal(int x, int y) {
-            
+
             if (x >= size) {
                 x = 0;
                 y++;
@@ -302,14 +302,27 @@ namespace ConsoleApplication {
                     cols[y] ^= i;
                     squares[squarePos] ^= i;
 
+                    // Check if values are still possible
+                    for(int x2 = 0; x2 < size; x2++) {
+                        for (int y2 = 0; y2 < size; y2++) {
+                            if (sudokuValues[x2, y2] == 0x0) { // Value no set
+                                if ((lines[x2] & cols[y2] & squares[((x2 / squareSize) * squareSize) + (y2 / squareSize)]) == 0x0) {
+                                    goto Revert;
+
+                                }
+                            }
+                        }
+                    }
+
                     if (SolveInternal(x + 1, y)) {
                         return true; // Solution working, quit
-                    } else {
+                    }
+
+                    Revert:
                         // Revert
                         lines[x] |= i;
                         cols[y] |= i;
                         squares[squarePos] |= i;
-                    }
                 }
             }
 

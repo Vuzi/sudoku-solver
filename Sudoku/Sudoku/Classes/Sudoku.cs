@@ -4,10 +4,18 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices; 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography; 
 
-namespace ConsoleApplication {
+namespace SudokuSolver {
 
     enum SudokuValidationError {
         LINE, SQUARE, COLUMN
@@ -592,3 +600,4 @@ namespace ConsoleApplication {
         public uint[] squares { get; set; }
     }
 }
+

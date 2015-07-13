@@ -5,23 +5,15 @@ using System.Text;
 using System.IO;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices; 
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography; 
 
 namespace SudokuSolver {
 
-    enum SudokuValidationError {
+    public enum SudokuValidationError {
         LINE, SQUARE, COLUMN
     };
 
-    class SudokuValidation {
+    public class SudokuValidation {
 
         public SudokuValidationError error { get; protected set; }
         public int nb { get; protected set; }
@@ -49,7 +41,7 @@ namespace SudokuSolver {
     /// <summary>
     /// Sudoku class
     /// </summary>
-    class Sudoku {
+    public class Sudoku {
 
         public String name { get; protected set; }
         public DateTime date { get; protected set; }
@@ -98,6 +90,11 @@ namespace SudokuSolver {
         /// <param name="sudoku">The sudoku itself</param>
         public Sudoku(string name, DateTime date, String dictionnary, char[,] sudoku, char jocker='.') {
             this.InitSudoku(name, date, dictionnary, sudoku, jocker);
+        }
+
+        public Sudoku()
+        {
+            // TODO: Complete member initialization
         }
 
         /// <summary>

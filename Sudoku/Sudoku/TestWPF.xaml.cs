@@ -82,11 +82,6 @@ namespace SudokuSolver
             }
         }
 
-        void tb_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private static FrameworkElement CreateGridCases(Sudoku sudoku, int x, int y)
         {
             FrameworkElement elementGraphique;
@@ -107,7 +102,5 @@ namespace SudokuSolver
             Grid.SetColumn(elementGraphique, y);
             return elementGraphique;
         }
-
-
     }
 }

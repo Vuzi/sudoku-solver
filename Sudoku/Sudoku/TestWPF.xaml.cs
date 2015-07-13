@@ -45,7 +45,19 @@ namespace SudokuSolver
 
         }
 
+        private void Button_Resolve_Grid(object sender, RoutedEventArgs e)
+        {
+            App.ViewModelSudoku.ResolveGrid();
+            Reload_Selection();
+        }
+
         private void ListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Reload_Selection();
+            
+        }
+
+        void Reload_Selection()
         {
             FrontGrid.Children.Clear();
             FrontGrid.RowDefinitions.Clear();
@@ -68,7 +80,6 @@ namespace SudokuSolver
                     FrontGrid.Children.Add(elem);
                 }
             }
-            
         }
 
         void tb_Click(object sender, RoutedEventArgs e)

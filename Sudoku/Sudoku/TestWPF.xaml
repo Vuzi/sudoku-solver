@@ -16,7 +16,7 @@
             <Button Content="Générer un sudoku" Click="Button_Add_Grid"/>
             <Button Content="Supprimer une grille" Click="Button_Remove_Grid"/>
             <Button Content="Charger un fichier" Click="Button_Load_File"/>
-            <Button Content="Résoudre un sudoku" Click="Button_Resolve_Sudoku"/>
+            <Button Content="Résoudre un sudoku" Click="Button_Resolve_Grid"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">

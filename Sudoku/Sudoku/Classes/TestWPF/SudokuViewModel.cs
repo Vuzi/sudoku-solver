@@ -42,9 +42,12 @@ namespace SudokuSolver
             foreach (Sudoku sudoku in sudokuList)
             {
                 SudokuList.Add(sudoku);
-                //sudoku.Solve();
-                //sudoku.DisplaySudoku();
             }
+        }
+
+        public void ResolveGrid()
+        {
+            SelectedSudoku.Solve();
         }
     }
 }

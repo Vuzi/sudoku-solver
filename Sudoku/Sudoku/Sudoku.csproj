@@ -54,9 +54,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Sudoku.cs" />
-    <Compile Include="Classes\TestWPF\Case.cs" />
-    <Compile Include="Classes\TestWPF\Grille.cs" />
-    <Compile Include="Classes\TestWPF\SudokuViewModel.cs" />
+    <Compile Include="Classes\SudokuViewModel.cs" />
     <Compile Include="ResolutionWindow.xaml.cs">
       <DependentUpon>ResolutionWindow.xaml</DependentUpon>
     </Compile>

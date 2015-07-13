@@ -102,5 +102,6 @@ namespace SudokuSolver
             Grid.SetColumn(elementGraphique, y);
             return elementGraphique;
         }
+
     }
 }

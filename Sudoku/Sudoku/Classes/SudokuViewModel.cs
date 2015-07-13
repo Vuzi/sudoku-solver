@@ -23,6 +23,7 @@ namespace SudokuSolver
         public void AddGrid()
         {
             Sudoku generatedSudoku = new Sudoku("Generated sudoku " + (SudokuList.Count + 1), DateTime.Now, "123456789");
+            generatedSudoku.Validate();
             SudokuList.Add(generatedSudoku);
         }
 
@@ -30,24 +31,40 @@ namespace SudokuSolver
         {
             if (SelectedSudoku == null)
                 System.Windows.MessageBox.Show("No item selected", "Info");
-
-            SudokuList.Remove(SelectedSudoku);
+            else
+                SudokuList.Remove(SelectedSudoku);
         }
 
         public void ChargerFichier(String file)
         {
-            List<Sudoku> sudokuList = Sudoku.InitFromFile(file);
-            SudokuList.Clear();
+            if (file == null) return;
 
-            foreach (Sudoku sudoku in sudokuList)
+            try
             {
-                SudokuList.Add(sudoku);
+                List<Sudoku> sudokuList = Sudoku.InitFromFile(file);
+                SudokuList.Clear();
+
+                foreach (Sudoku sudoku in sudokuList)
+                {
+                    sudoku.Validate();
+                    SudokuList.Add(sudoku);
+                }
+            }
+            catch (Exception)
+            {
+                System.Windows.MessageBox.Show("The file is not valid", "Error");
             }
         }
 
         public void ResolveGrid()
         {
-            SelectedSudoku.Solve();
+            if (SelectedSudoku == null)
+                System.Windows.MessageBox.Show("No item selected", "Info");
+            else
+            {
+                SelectedSudoku.Solve();
+                SelectedSudoku.Validate();
+            }
         }
     }
 }

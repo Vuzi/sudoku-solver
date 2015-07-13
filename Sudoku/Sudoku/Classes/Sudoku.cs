@@ -49,6 +49,7 @@ namespace SudokuSolver {
         public int size { get; protected set; }
         public int squareSize { get; protected set; }
         public char[,] sudoku { get; protected set; }
+        public bool valid { get; set; }
         private uint[,] sudokuValues;
         private Dictionary<uint, char> correspondances;
         private char jocker;
@@ -280,13 +281,23 @@ namespace SudokuSolver {
                 }
 
                 if (line != controlSum)
+                {
+                    valid = false;
                     return new SudokuValidation(SudokuValidationError.LINE, i);
+                }
                 else if (col != controlSum)
+                {
                     return new SudokuValidation(SudokuValidationError.COLUMN, i);
+                    valid = false;
+                }
                 else if (square != controlSum)
+                {
                     return new SudokuValidation(SudokuValidationError.SQUARE, i);
+                    valid = false;
+                }
             }
 
+            valid = true;
             return null;
         }
 

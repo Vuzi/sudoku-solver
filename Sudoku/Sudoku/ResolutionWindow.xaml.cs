@@ -65,6 +65,7 @@ namespace SudokuSolver
 
             Sudoku sudoku = App.ViewModelSudoku.SelectedSudoku;
             if (sudoku == null) return;
+            sudoku.Validate();
 
             for (int i = 0; i < sudoku.size; i++)
             {

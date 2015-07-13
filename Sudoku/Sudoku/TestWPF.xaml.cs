@@ -89,7 +89,7 @@ namespace SudokuSolver
             if (c == '.')
             {
                 Rectangle rectangle = new Rectangle();
-                rectangle.Fill = new SolidColorBrush(Colors.White);
+                rectangle.Fill = new SolidColorBrush(Colors.CadetBlue);
                 elementGraphique = rectangle;
             }
             else

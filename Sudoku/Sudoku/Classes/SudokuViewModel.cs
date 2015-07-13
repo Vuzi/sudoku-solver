@@ -16,7 +16,7 @@ namespace SudokuSolver
 
         public SudokuViewModel()
         {
-            ApplicationName = "Application de Sudokus";
+            ApplicationName = "Sudoku Application";
             SudokuList = new ObservableCollection<Sudoku>();
         }
 
@@ -29,7 +29,7 @@ namespace SudokuSolver
         public void DeleteGrid()
         {
             if (SelectedSudoku == null)
-                System.Windows.MessageBox.Show("Aucun item sélectionné", "Info");
+                System.Windows.MessageBox.Show("No item selected", "Info");
 
             SudokuList.Remove(SelectedSudoku);
         }

@@ -30,6 +30,4 @@ D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\SudokuSolver.Properties.Resourc
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.Cache
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.exe
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
-D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\TestWPF.baml
-D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\TestWPF.g.cs
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.csprojResolveAssemblyReference.cache

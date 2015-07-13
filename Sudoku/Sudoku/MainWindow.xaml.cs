@@ -27,24 +27,10 @@ namespace SudokuSolver
 
         private void ComboBox_Difficulty_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString().Equals("Générer un Sudoku"))
+            if (((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString().Equals("SudokuResolver"))
             {
-                MessageBox.Show(((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString());
-            }
-            else if (((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString().Equals("Résoudre un Sudoku"))
-            {
-                ResolutionWindow rw = new ResolutionWindow();
-                rw.Show();
-                this.Hide();
-            }
-            else if (((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString().Equals("Vérifier un Sudoku"))
-            {
-                MessageBox.Show(((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString());
-            }
-            else if (((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString().Equals("Test WPF"))
-            {
-                TestWPF twpf = new TestWPF();
-                twpf.Show();
+                ResolutionWindow resolutionWindow = new ResolutionWindow();
+                resolutionWindow.Show();
                 this.Hide();
             }
         }

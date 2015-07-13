@@ -58,9 +58,6 @@
     <Compile Include="ResolutionWindow.xaml.cs">
       <DependentUpon>ResolutionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestWPF.xaml.cs">
-      <DependentUpon>TestWPF.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -74,10 +71,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResolutionWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TestWPF.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

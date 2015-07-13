@@ -22,7 +22,7 @@ namespace SudokuSolver
 
         public void AddGrid()
         {
-            Sudoku generatedSudoku = new Sudoku("Generated sudoku " + SudokuList.Count + 1, DateTime.Now, "123456789");
+            Sudoku generatedSudoku = new Sudoku("Generated sudoku " + (SudokuList.Count + 1), DateTime.Now, "123456789");
             SudokuList.Add(generatedSudoku);
         }
 

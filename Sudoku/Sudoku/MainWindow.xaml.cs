@@ -27,7 +27,7 @@ namespace SudokuSolver
 
         private void ComboBox_Difficulty_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString().Equals("SudokuResolver"))
+            if (((ComboBoxItem)ComboBox_menu.SelectedValue).Content.ToString().Equals("SudokuSolver"))
             {
                 ResolutionWindow resolutionWindow = new ResolutionWindow();
                 resolutionWindow.Show();

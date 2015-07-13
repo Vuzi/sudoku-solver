@@ -26,17 +26,6 @@ namespace SudokuSolver
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Sélection d'un fichier de Sudoku
-            var openFileDialog = new Microsoft.Win32.OpenFileDialog() { Filter = "Sudoku Files (*.sud, *.sudoku)|*.sud;*.sudoku|Text Files (*.txt)|*.txt|All Files (*.*)|*.*" };
-            var result = openFileDialog.ShowDialog();
-
-            List<Sudoku> sudokuList = Sudoku.InitFromFile(openFileDialog.FileName);
-
-            foreach (Sudoku sudoku in sudokuList)
-            {
-                sudoku.Solve();
-                sudoku.DisplaySudoku();
-            }
             
         }
     }

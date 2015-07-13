@@ -9,37 +9,42 @@ namespace SudokuSolver
 {
     public class SudokuViewModel
     {
-        public string NomApplication { get; set; }
+        public string ApplicationName { get; set; }
 
-        public ObservableCollection<Grille> GrilleList { get; set; }
-        public Grille GrilleSelect { get; set; }
+        public ObservableCollection<Sudoku> SudokuList { get; set; }
+        public Sudoku SelectedSudoku { get; set; }
 
         public SudokuViewModel()
         {
-            NomApplication = "Super Application de Sudoku !";
-            GrilleList = new ObservableCollection<Grille>();
-            GrilleList.Add(new Grille { Nom = "Grille 1", Date = "16/06/2015 19:34:00", Symboles = "123456789" });
-            GrilleList.Add(new Grille { Nom = "Grille 2", Date = "16/06/2015 19:34:00", Symboles = "123456789" });
-            GrilleList.Add(new Grille { Nom = "Grille 3", Date = "16/06/2015 19:34:00", Symboles = "123456789" });
-            foreach (var grille in GrilleList)
+            ApplicationName = "Application de Sudokus";
+            SudokuList = new ObservableCollection<Sudoku>();
+        }
+
+        public void AddGrid()
+        {
+            Sudoku generatedSudoku = new Sudoku("Generated sudoku " + SudokuList.Count + 1, DateTime.Now, "123456789");
+            SudokuList.Add(generatedSudoku);
+        }
+
+        public void DeleteGrid()
+        {
+            if (SelectedSudoku == null)
+                System.Windows.MessageBox.Show("Aucun item sélectionné", "Info");
+
+            SudokuList.Remove(SelectedSudoku);
+        }
+
+        public void ChargerFichier(String file)
+        {
+            List<Sudoku> sudokuList = Sudoku.InitFromFile(file);
+            SudokuList.Clear();
+
+            foreach (Sudoku sudoku in sudokuList)
             {
-                grille.InitTabCases();
+                SudokuList.Add(sudoku);
+                //sudoku.Solve();
+                //sudoku.DisplaySudoku();
             }
-        }
-
-        public void AjouterGrille()
-        {
-            int numGrille = GrilleList.Count +1;
-            Grille uneGrille = new Grille{ Nom = "Grille "+ numGrille.ToString(), Date = DateTime.Now.ToString(), Symboles = "123456789" };
-            uneGrille.InitTabCases();
-            GrilleList.Add(uneGrille);
-        }
-
-        public void SupprimerGrille()
-        {
-            if (GrilleSelect == null)
-                System.Windows.MessageBox.Show("Aucun item sélectionné !", "Info");
-            GrilleList.Remove(GrilleSelect);
         }
     }
 }

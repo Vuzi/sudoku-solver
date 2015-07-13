@@ -26,35 +26,46 @@ namespace SudokuSolver
             DataContext = App.ViewModelSudoku;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Add_Grid(object sender, RoutedEventArgs e)
         {
-            App.ViewModelSudoku.AjouterGrille();
+            App.ViewModelSudoku.AddGrid();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Remove_Grid(object sender, RoutedEventArgs e)
         {
-            App.ViewModelSudoku.SupprimerGrille();
+            App.ViewModelSudoku.DeleteGrid();
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Load_File(object sender, RoutedEventArgs e)
         {
-            FrontGrille.Children.Clear();
-            FrontGrille.RowDefinitions.Clear();
-            FrontGrille.ColumnDefinitions.Clear();
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog() { Filter = "Sudoku Files (*.sud, *.sudoku)|*.sud;*.sudoku|Text Files (*.txt)|*.txt|All Files (*.*)|*.*" };
+            var result = openFileDialog.ShowDialog();
 
-            Grille g = App.ViewModelSudoku.GrilleSelect;
-            for (int i = 0; i < g.Taille; i++)
+            App.ViewModelSudoku.ChargerFichier(openFileDialog.FileName);
+
+        }
+
+        private void ListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FrontGrid.Children.Clear();
+            FrontGrid.RowDefinitions.Clear();
+            FrontGrid.ColumnDefinitions.Clear();
+
+            Sudoku sudoku = App.ViewModelSudoku.SelectedSudoku;
+            if (sudoku == null) return;
+
+            for (int i = 0; i < sudoku.size; i++)
             {
-                FrontGrille.RowDefinitions.Add(new RowDefinition());
-                FrontGrille.ColumnDefinitions.Add(new ColumnDefinition());
+                FrontGrid.RowDefinitions.Add(new RowDefinition());
+                FrontGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            for (int i = 0; i < g.Taille; i++)
+            for (int i = 0; i < sudoku.size; i++)
             {
-                for (int j = 0; j < g.Taille; j++)
+                for (int j = 0; j < sudoku.size; j++)
                 {
-                    FrameworkElement elem = CreerCaseDeGrid(g, i, j);
-                    FrontGrille.Children.Add(elem);
+                    FrameworkElement elem = CreateGridCases(sudoku, i, j);
+                    FrontGrid.Children.Add(elem);
                 }
             }
             
@@ -65,30 +76,27 @@ namespace SudokuSolver
             throw new NotImplementedException();
         }
 
-        private static FrameworkElement CreerCaseDeGrid(Grille g, int i, int j)
+        private static FrameworkElement CreateGridCases(Sudoku sudoku, int x, int y)
         {
             FrameworkElement elementGraphique;
-            char c = g.Tab[i, j].Valeur;
+            char c = sudoku.sudoku[x, y];
             if (c == '.')
             {
-                Rectangle r = new Rectangle();
-                r.Fill = new SolidColorBrush(Colors.White);
-                elementGraphique = r;
+                Rectangle rectangle = new Rectangle();
+                rectangle.Fill = new SolidColorBrush(Colors.White);
+                elementGraphique = rectangle;
             }
             else
             {
-                Button b = new Button();
-                b.Content = c;
-                elementGraphique = b;
+                Button button = new Button();
+                button.Content = c;
+                elementGraphique = button;
             }
-            Grid.SetRow(elementGraphique, i);
-            Grid.SetColumn(elementGraphique, j);
+            Grid.SetRow(elementGraphique, x);
+            Grid.SetColumn(elementGraphique, y);
             return elementGraphique;
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            
-        }
+
     }
 }

@@ -19,13 +19,13 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Button Content="Résoudre un sudoku" Click="Button_Resolve_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
-            <Button Content="Supprimer une grille" Click="Button_Remove_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
+            <Button Content="Charger un fichier" Click="Button_Load_File" Height="25px" Width="219" Margin="10,0,11,10"/>
+            <Button Content="Générer un sudoku" Click="Button_Add_Grid" Height="25px" Margin="10,0,11,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="2">
-            <Button Content="Générer un sudoku" Click="Button_Add_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
-            <Button Content="Charger un fichier" Click="Button_Load_File" Height="25px" Margin="10px, 0px, 10px, 10px"/>
+            <Button Content="Résoudre un sudoku" Click="Button_Resolve_Grid" Height="25px" Margin="10,0,11,10"/>
+            <Button Content="Supprimer une grille" Click="Button_Remove_Grid" Height="25px" Margin="10,0,11,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="15px">

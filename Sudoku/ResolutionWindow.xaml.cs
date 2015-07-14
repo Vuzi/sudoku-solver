@@ -52,6 +52,11 @@ namespace SudokuSolver
             Reload_Selection();
         }
 
+        private void Button_Validate_Grid(object sender, RoutedEventArgs e) {
+            App.ViewModelSudoku.ValidateGrid();
+            Reload_Selection();
+        }
+
         private void ListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Reload_Selection();
@@ -63,12 +68,13 @@ namespace SudokuSolver
             FrontGrid.RowDefinitions.Clear();
             FrontGrid.ColumnDefinitions.Clear();
 
-            Sudoku sudoku = App.ViewModelSudoku.SelectedSudoku;
+            Sudoku sudoku = App.ViewModelSudoku.SelectedSudoku.sudoku;
 
             if (sudoku == null)
             {
                 buttonRemoveGrid.Visibility = Visibility.Hidden;
                 buttonResolveGrid.Visibility = Visibility.Hidden;
+                buttonValidateGrid.Visibility = Visibility.Hidden;
                 return;
             }
 
@@ -90,6 +96,7 @@ namespace SudokuSolver
 
             buttonRemoveGrid.Visibility = Visibility.Visible;
             buttonResolveGrid.Visibility = Visibility.Visible;
+            buttonValidateGrid.Visibility = Visibility.Visible;
         }
 
         private static FrameworkElement CreateGridCases(Sudoku sudoku, int x, int y)
@@ -98,9 +105,11 @@ namespace SudokuSolver
             char c = sudoku.sudoku[x, y];
             if (c == '.')
             {
-                Rectangle rectangle = new Rectangle();
-                rectangle.Fill = new SolidColorBrush(Color.FromRgb(109, 149, 202));
-                elementGraphique = rectangle;
+                TextBox value = new TextBox();
+                //Rectangle rectangle = new Rectangle();
+                value.Name = "valueSudoku";
+                //value.Background = new SolidColorBrush(Color.FromRgb(109, 149, 202));
+                elementGraphique = value;
             }
             else
             {

@@ -49,7 +49,7 @@ namespace SudokuSolver {
             int diffValue = diff.Value;
 
             App.ViewModelSudoku.AddGrid(sizeValue, diffValue);
-            this.Hide();
+            this.Close();
         }
 
     }

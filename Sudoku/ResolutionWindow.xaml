@@ -2,6 +2,28 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{Binding ApplicationName}" Height="871.069" Width="1296.698">
+    <Window.Resources>
+        <Style x:Name="valueSudoku" TargetType="TextBox">
+            <Setter Property="Background" Value="#FF7494CA"/>
+            <Setter Property="FontSize" Value="15px" />
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MaxLength" Value="1"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style x:Key="validSudoku" TargetType="Ellipse">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Valid}" Value="False">
+                    <Setter Property="Fill" Value="#FFFE3838"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Valid}" Value="True">
+                    <Setter Property="Fill" Value="#FF65ED9B"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid Background="#FF1D1D1D">
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="34*"/>
@@ -15,7 +37,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-            <Label VerticalAlignment="Top" FontFamily="Lobster 1.4" FontSize="36" Background="{x:Null}" Foreground="White" Height="55" Content="SudokuSolver" HorizontalAlignment="Center" Margin="30"/>
+            <Label VerticalAlignment="Top" FontFamily="Lobster 1.4" FontSize="36" Background="{x:Null}" Foreground="White" Height="55" Content="SudokuSolver" HorizontalAlignment="Center" Margin="20"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
@@ -25,30 +47,33 @@
 
         <StackPanel Grid.Row="1" Grid.Column="2">
             <Button x:Name="buttonResolveGrid" Content="Résoudre le sudoku" Click="Button_Resolve_Grid" Height="25px" Margin="11,0,10,10" Visibility="Hidden"/>
+            <Button x:Name="buttonValidateGrid" Content="Vérifier le sudoku" Click="Button_Validate_Grid" Height="25px" Margin="11,0,10,10" Visibility="Hidden"/>
             <Button x:Name="buttonRemoveGrid" Content="Supprimer la grille" Click="Button_Remove_Grid" Height="25px" Margin="11,0,10,10" Visibility="Hidden"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="15px">
-            <TextBlock Text="{Binding SelectedSudoku.name}"  Foreground="AntiqueWhite"/>
-            <TextBlock Text="{Binding SelectedSudoku.date}" Foreground="AntiqueWhite"/>
-            <TextBlock Text="{Binding SelectedSudoku.dictionnary}" Foreground="AntiqueWhite"/>
+            <TextBlock Text="{Binding SelectedSudoku.Name}"  Foreground="AntiqueWhite"/>
+            <TextBlock Text="{Binding SelectedSudoku.Date}" Foreground="AntiqueWhite"/>
+            <TextBlock Text="{Binding SelectedSudoku.Dictionnary}" Foreground="AntiqueWhite"/>
         </StackPanel>
 
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SudokuList.name}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SudokuList.Name}"/>
         <ListBox Background="#FF232323" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" SelectionChanged="ListBox_OnSelectionChanged" SelectedItem="{Binding SelectedSudoku}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding SudokuList}" ToolTip="{Binding SudokuList.Count}" Margin="10,71,10,10">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="20"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding name}" Foreground="AntiqueWhite"/>
-                        <TextBlock Grid.Column="1" Text="{Binding date}" Foreground="AntiqueWhite"/>
+                        <Ellipse Grid.Column="0" Style="{StaticResource  validSudoku}" Height="8" Width="8"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Name}" Foreground="AntiqueWhite"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Date}" Foreground="AntiqueWhite"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Grid Name="FrontGrid" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
+        <Grid Name="FrontGrid" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="0, 0, 0, 10"/>
     </Grid>
 </Window>

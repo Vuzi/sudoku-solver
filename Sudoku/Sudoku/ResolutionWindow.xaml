@@ -19,7 +19,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Button Content="Charger un fichier" Click="Button_Load_File" Height="25px" Width="219" Margin="10,0,11,10"/>
+            <Button Content="Charger un fichier" Click="Button_Load_File" Height="25px" Margin="10,0,11,10"/>
             <Button Content="Générer un sudoku" Click="Button_Add_Grid" Height="25px" Margin="10,0,11,10"/>
         </StackPanel>
 

@@ -46,9 +46,9 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="2">
-            <Button x:Name="buttonResolveGrid" Content="Résoudre le sudoku" Click="Button_Resolve_Grid" Height="25px" Margin="11,0,10,10" Visibility="Hidden"/>
-            <Button x:Name="buttonValidateGrid" Content="Vérifier le sudoku" Click="Button_Validate_Grid" Height="25px" Margin="11,0,10,10" Visibility="Hidden"/>
             <Button x:Name="buttonRemoveGrid" Content="Supprimer la grille" Click="Button_Remove_Grid" Height="25px" Margin="11,0,10,10" Visibility="Hidden"/>
+            <Button x:Name="buttonResolveGrid" Content="Résoudre le sudoku" Click="Button_Resolve_Grid" Height="25px" Margin="11,0,10,10" Visibility="Hidden"/>
+            <Button x:Name="buttonValidateGrid" Content="Valider le sudoku" Click="Button_Validate_Grid" Height="25px" Margin="11,0,10,10" Visibility="Hidden"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="15px">

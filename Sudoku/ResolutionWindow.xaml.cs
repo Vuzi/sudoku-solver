@@ -94,9 +94,13 @@ namespace SudokuSolver
                 }
             }
 
+            if (sudoku.valid)
+                buttonValidateGrid.Visibility = Visibility.Hidden;
+            else
+                buttonValidateGrid.Visibility = Visibility.Visible;
+
             buttonRemoveGrid.Visibility = Visibility.Visible;
             buttonResolveGrid.Visibility = Visibility.Visible;
-            buttonValidateGrid.Visibility = Visibility.Visible;
         }
 
         private static FrameworkElement CreateGridCases(Sudoku sudoku, int x, int y)

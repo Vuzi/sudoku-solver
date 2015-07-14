@@ -20,9 +20,10 @@ namespace SudokuSolver
             SudokuList = new ObservableCollection<Sudoku>();
         }
 
-        public void AddGrid()
+        public void AddGrid(int size, int difficulty)
         {
-            Sudoku generatedSudoku = new Sudoku("Generated sudoku " + (SudokuList.Count + 1), DateTime.Now, "123456789");
+            String dictionary = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            Sudoku generatedSudoku = new Sudoku("Generated sudoku " + (SudokuList.Count + 1), DateTime.Now, dictionary.Substring(0, size), difficulty);
             generatedSudoku.Validate();
             SudokuList.Add(generatedSudoku);
         }

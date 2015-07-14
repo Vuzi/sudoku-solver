@@ -93,11 +93,6 @@ namespace SudokuSolver {
             this.InitSudoku(name, date, dictionnary, sudoku, jocker);
         }
 
-        public Sudoku()
-        {
-            // TODO: Complete member initialization
-        }
-
         /// <summary>
         /// Initialize the sudoku
         /// </summary>
@@ -242,13 +237,7 @@ namespace SudokuSolver {
         /// Set some randomly found values to zero in the sudoku. 
         /// </summary>
         private void Sparse(int difficulty) {
-            // 1 = 5%
-            // 2 = 10% etc..
 
-            if (difficulty > 5)
-                difficulty = 5; // Max to 50%
-
-            difficulty *= 5;
             int toRemove = (this.size * this.size * difficulty) / 100;
             Random rnd = new Random();
 
@@ -269,6 +258,8 @@ namespace SudokuSolver {
         /// </summary>
         /// <returns>True if the sudoku is valid, false otherwise</returns>
         public SudokuValidation Validate() {
+            valid = false;
+
             for (int i = 0; i < size; i++) {
                 uint line = 0;
                 uint col = 0;
@@ -280,20 +271,14 @@ namespace SudokuSolver {
                     square ^= sudokuValues[(i / squareSize) * squareSize + j / squareSize, i * squareSize % size + j % squareSize];
                 }
 
-                if (line != controlSum)
-                {
-                    valid = false;
+                if (line != controlSum) {
                     return new SudokuValidation(SudokuValidationError.LINE, i);
                 }
-                else if (col != controlSum)
-                {
+                else if (col != controlSum) {
                     return new SudokuValidation(SudokuValidationError.COLUMN, i);
-                    valid = false;
                 }
-                else if (square != controlSum)
-                {
+                else if (square != controlSum) {
                     return new SudokuValidation(SudokuValidationError.SQUARE, i);
-                    valid = false;
                 }
             }
 

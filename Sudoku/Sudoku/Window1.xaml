@@ -1,0 +1,19 @@
+﻿<Window x:Class="SudokuSolver.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="300" Width="492">
+    <Grid Background="#FF1D1D1D">
+        <Label Content="Génération Sudoku" Margin="10,24,10,0" VerticalAlignment="Top" FontFamily="Lobster 1.4" FontSize="36" Background="{x:Null}" Foreground="White" Height="55" HorizontalAlignment="Center" Width="316"/>
+        <TextBlock HorizontalAlignment="Right" Height="22" Margin="0,287,10,0" TextWrapping="Wrap" Text="Created by Someone. All rights reserved." VerticalAlignment="Bottom" Width="217" Foreground="White"/>
+
+        <Label Content="Taille" Margin="6,110,226,0" VerticalAlignment="Top" FontFamily="Lobster 1.4" FontSize="15" Background="{x:Null}" Foreground="White" Height="29" HorizontalAlignment="Center"/>
+
+        <ComboBox x:Name="SudokuSize" HorizontalAlignment="Center" Height="29" Margin="92,110,50,0" VerticalAlignment="Top" Width="150" SnapsToDevicePixels="True">
+        </ComboBox>
+        <ComboBox x:Name="SudokuDifficulty" HorizontalAlignment="Center" Height="29" Margin="92,160,50,0" VerticalAlignment="Top" Width="150" SnapsToDevicePixels="True">
+        </ComboBox>
+        <Label Content="Difficulté" Margin="14,160,205,0" VerticalAlignment="Top" FontFamily="Lobster 1.4" FontSize="15" Background="{x:Null}" Foreground="White" Height="29" HorizontalAlignment="Center" Width="73"/>
+        <Button Content="Générer le sudoku" HorizontalAlignment="Center" Margin="0,0,0,30" VerticalAlignment="Bottom" Width="148" Click="Button_Click"/>
+
+    </Grid>
+</Window>

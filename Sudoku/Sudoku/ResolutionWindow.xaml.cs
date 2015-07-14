@@ -28,7 +28,8 @@ namespace SudokuSolver
 
         private void Button_Add_Grid(object sender, RoutedEventArgs e)
         {
-            App.ViewModelSudoku.AddGrid();
+            Window1 generationWindow = new Window1();
+            generationWindow.Show();
         }
 
         private void Button_Remove_Grid(object sender, RoutedEventArgs e)

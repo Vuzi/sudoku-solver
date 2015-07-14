@@ -28,7 +28,7 @@ namespace SudokuSolver
 
         private void Button_Add_Grid(object sender, RoutedEventArgs e)
         {
-            Window1 generationWindow = new Window1();
+            SudokuGenerationFormWindow generationWindow = new SudokuGenerationFormWindow();
             generationWindow.Show();
         }
 

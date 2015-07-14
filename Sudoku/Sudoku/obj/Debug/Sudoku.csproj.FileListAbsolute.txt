@@ -31,3 +31,5 @@ D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.exe
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
 D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\Sudoku.csprojResolveAssemblyReference.cache
+D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\SudokuGenerationFormWindow.baml
+D:\DEV\GIT\sudoku-solver\Sudoku\Sudoku\obj\Debug\SudokuGenerationFormWindow.g.cs

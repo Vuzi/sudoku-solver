@@ -17,8 +17,8 @@ namespace SudokuSolver {
     /// <summary>
     /// Logique d'interaction pour Window1.xaml
     /// </summary>
-    public partial class Window1 : Window {
-        public Window1() {
+    public partial class SudokuGenerationFormWindow : Window {
+        public SudokuGenerationFormWindow() {
             InitializeComponent();
 
             // Init size values

@@ -19,17 +19,13 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Button Content="Générer un sudoku" Click="Button_Add_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
-            <Button Content="Charger un fichier" Click="Button_Load_File" Height="25px" Margin="10px, 0px, 10px, 10px"/>
-            <Button Content="Supprimer une grille" Click="Button_Remove_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
             <Button Content="Résoudre un sudoku" Click="Button_Resolve_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
+            <Button Content="Supprimer une grille" Click="Button_Remove_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="2">
             <Button Content="Générer un sudoku" Click="Button_Add_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
             <Button Content="Charger un fichier" Click="Button_Load_File" Height="25px" Margin="10px, 0px, 10px, 10px"/>
-            <Button Content="Supprimer une grille" Click="Button_Remove_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
-            <Button Content="Résoudre un sudoku" Click="Button_Resolve_Grid" Height="25px" Margin="10px, 0px, 10px, 10px"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="15px">
@@ -39,7 +35,7 @@
         </StackPanel>
 
         <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SudokuList.name}"/>
-        <ListBox Background="#FF2E2E2E" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" SelectionChanged="ListBox_OnSelectionChanged" SelectedItem="{Binding SelectedSudoku}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding SudokuList}" ToolTip="{Binding SudokuList.Count}" Margin="10,148,10,10">
+        <ListBox Background="#FF232323" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" SelectionChanged="ListBox_OnSelectionChanged" SelectedItem="{Binding SelectedSudoku}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding SudokuList}" ToolTip="{Binding SudokuList.Count}" Margin="10,71,10,10">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

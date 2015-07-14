@@ -43,7 +43,7 @@ namespace SudokuSolver
         private void Button_Export(object sender, RoutedEventArgs e)
         {
             if (App.ViewModelSudoku.SudokuList.Count <= 0) {
-                System.Windows.MessageBox.Show("Aucun sudoku à exporter", "Export impossible");
+                System.Windows.MessageBox.Show("Aucun sudoku à exporter.", "Export impossible");
                 return;
             }
 
@@ -107,12 +107,16 @@ namespace SudokuSolver
                 }
             }
 
-            if (sudoku.Valid) {
+            if (sudoku.Valid)
+            {
                 buttonValidateGrid.Visibility = Visibility.Hidden;
                 buttonResolveGrid.Visibility = Visibility.Hidden;
-            } else
+            }
+            else
+            {
                 buttonValidateGrid.Visibility = Visibility.Visible;
-
+                buttonResolveGrid.Visibility = Visibility.Visible;
+            }
             sudokuInfoPanel.Visibility = Visibility.Visible;
         }
 
@@ -158,10 +162,6 @@ namespace SudokuSolver
                     key = Char.ToUpper(key);
 
                 if (App.ViewModelSudoku.SelectedSudoku.Dictionary.Contains(key)) {
-
-
-                    //System.Windows.MessageBox.Show(Grid.GetRow(textBox) + ":" + Grid.GetColumn(textBox), "Information");
-
                     App.ViewModelSudoku.SelectedSudoku.SetValueAt(Grid.GetRow(textBox), Grid.GetColumn(textBox), key);
                     textBox.Text = key + "";
 

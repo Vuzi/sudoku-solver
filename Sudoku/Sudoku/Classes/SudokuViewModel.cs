@@ -16,14 +16,14 @@ namespace SudokuSolver
 
         public SudokuViewModel()
         {
-            ApplicationName = "Sudoku Application";
+            ApplicationName = "SudokuSolver";
             SudokuList = new ObservableCollection<Sudoku>();
         }
 
         public void AddGrid(int size, int difficulty)
         {
             String dictionary = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            Sudoku generatedSudoku = new Sudoku("Generated sudoku " + (SudokuList.Count + 1), DateTime.Now, dictionary.Substring(0, size), difficulty);
+            Sudoku generatedSudoku = new Sudoku("Sudoku " + (SudokuList.Count + 1), DateTime.Now, dictionary.Substring(0, size), difficulty);
             generatedSudoku.Validate();
             SudokuList.Add(generatedSudoku);
         }

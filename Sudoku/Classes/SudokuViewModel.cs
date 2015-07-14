@@ -14,12 +14,42 @@ namespace SudokuSolver
         public bool Valid { get { return sudoku.valid; } }
         public String Name { get { return sudoku.name; } }
         public DateTime Date { get { return sudoku.date; } }
+        public int Size { get { return sudoku.size;  } }
         public String Dictionary { get { return sudoku.dictionnary; } }
-
+        public String SizeFormated { get { return sudoku.size + "x" + sudoku.size; } }
         public event PropertyChangedEventHandler PropertyChanged;
+        private bool[,] editableValues;
 
         public SudokuGridViewModel(Sudoku _sudoku) {
             sudoku = _sudoku;
+
+            editableValues = new bool[sudoku.size, sudoku.size];
+
+            for (int i = 0; i < sudoku.size; i++) {
+                for (int j = 0; j < sudoku.size; j++) {
+
+                    if (sudoku.sudoku[i, j] == '.') {
+                        editableValues[i, j] = true;
+                    } else {
+                        editableValues[i, j] = false;
+                    }
+                }
+            }
+        }
+
+        public bool IsEditableAt(int x, int y) {
+            if (Valid)
+                return false;
+            return editableValues[x, y];
+        }
+
+        public char GetValueAt(int x, int y) {
+            return sudoku.sudoku[x, y];
+        }
+
+        public void SetValueAt(int x, int y, char val) {
+            sudoku.SetValueAt(x, y, val);
+            Validate();
         }
 
         private void OnPropertyChanged(string prop) {
@@ -102,6 +132,24 @@ namespace SudokuSolver
                 System.Windows.MessageBox.Show("Aucune grille selectionnée", "Information");
             else {
                 SelectedSudoku.Validate();
+            }
+        }
+
+        internal void ExportAll(string file) {
+            if (file == null || file == "") return;
+
+            try {
+                List<Sudoku> sudokuList = new List<Sudoku>();
+
+                foreach (SudokuGridViewModel sudoku in SudokuList) {
+                    sudokuList.Add(sudoku.sudoku);
+                }
+
+                Sudoku.WriteToFile(file, sudokuList);
+                System.Windows.MessageBox.Show("Sudokus exportés avec succès dans le fichier '" + file + "'", "Export terminé");
+
+            } catch (Exception) {
+                System.Windows.MessageBox.Show("Le fichier est invalide", "Erreur au chargement du fichier");
             }
         }
     }

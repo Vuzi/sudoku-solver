@@ -27,9 +27,11 @@ namespace SudokuSolver
             DataContext = App.ViewModelSudoku;
         }
 
-        private void Button_Add_Grid(object sender, RoutedEventArgs e)
-        {
+        private void Button_Add_Grid(object sender, RoutedEventArgs e) {
             SudokuGenerationFormWindow generationWindow = new SudokuGenerationFormWindow();
+            generationWindow.Owner = Application.Current.MainWindow; // We must also set the owner for this to work.
+            generationWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
             generationWindow.Show();
         }
 
@@ -38,13 +40,25 @@ namespace SudokuSolver
             App.ViewModelSudoku.DeleteGrid();
         }
 
+        private void Button_Export(object sender, RoutedEventArgs e)
+        {
+            if (App.ViewModelSudoku.SudokuList.Count <= 0) {
+                System.Windows.MessageBox.Show("Aucun sudoku à exporter", "Export impossible");
+                return;
+            }
+
+            var openFileDialog = new Microsoft.Win32.SaveFileDialog() { Filter = "Sudoku Files (*.sud, *.sudoku)|*.sud;*.sudoku|Text Files (*.txt)|*.txt|All Files (*.*)|*.*" };
+            var result = openFileDialog.ShowDialog();
+
+            App.ViewModelSudoku.ExportAll(openFileDialog.FileName);
+        }
+
         private void Button_Load_File(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new Microsoft.Win32.OpenFileDialog() { Filter = "Sudoku Files (*.sud, *.sudoku)|*.sud;*.sudoku|Text Files (*.txt)|*.txt|All Files (*.*)|*.*" };
             var result = openFileDialog.ShowDialog();
 
             App.ViewModelSudoku.ChargerFichier(openFileDialog.FileName);
-
         }
 
         private void Button_Resolve_Grid(object sender, RoutedEventArgs e)
@@ -69,60 +83,58 @@ namespace SudokuSolver
             FrontGrid.RowDefinitions.Clear();
             FrontGrid.ColumnDefinitions.Clear();
 
-            Sudoku sudoku = App.ViewModelSudoku.SelectedSudoku.sudoku;
+            SudokuGridViewModel sudoku = App.ViewModelSudoku.SelectedSudoku;
 
             if (sudoku == null)
             {
-                buttonRemoveGrid.Visibility = Visibility.Hidden;
-                buttonResolveGrid.Visibility = Visibility.Hidden;
-                buttonValidateGrid.Visibility = Visibility.Hidden;
+                sudokuInfoPanel.Visibility = Visibility.Hidden;
                 return;
             }
 
             sudoku.Validate();
-            for (int i = 0; i < sudoku.size; i++)
+            for (int i = 0; i < sudoku.Size; i++)
             {
                 FrontGrid.RowDefinitions.Add(new RowDefinition());
                 FrontGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            for (int i = 0; i < sudoku.size; i++)
+            for (int i = 0; i < sudoku.Size; i++)
             {
-                for (int j = 0; j < sudoku.size; j++)
+                for (int j = 0; j < sudoku.Size; j++)
                 {
                     FrameworkElement elem = CreateGridCases(sudoku, i, j);
                     FrontGrid.Children.Add(elem);
                 }
             }
 
-            if (sudoku.valid)
+            if (sudoku.Valid) {
                 buttonValidateGrid.Visibility = Visibility.Hidden;
-            else
+                buttonResolveGrid.Visibility = Visibility.Hidden;
+            } else
                 buttonValidateGrid.Visibility = Visibility.Visible;
 
-            buttonRemoveGrid.Visibility = Visibility.Visible;
-            buttonResolveGrid.Visibility = Visibility.Visible;
+            sudokuInfoPanel.Visibility = Visibility.Visible;
         }
 
-        private static FrameworkElement CreateGridCases(Sudoku sudoku, int x, int y)
+        private FrameworkElement CreateGridCases(SudokuGridViewModel sudoku, int x, int y)
         {
             FrameworkElement elementGraphique;
-            char c = sudoku.sudoku[x, y];
-            if (c == '.')
-            {
+
+            if (sudoku.IsEditableAt(x, y)) {
                 TextBox value = new TextBox();
                 value.TextChanged += sudokuValueText;
-                //Rectangle rectangle = new Rectangle();
                 value.Name = "valueSudoku";
-                //value.Background = new SolidColorBrush(Color.FromRgb(109, 149, 202));
                 elementGraphique = value;
-            }
-            else
-            {
+
+                if (sudoku.GetValueAt(x, y) != '.')
+                    value.Text = sudoku.GetValueAt(x, y) + "";
+
+            } else {
                 Button button = new Button();
-                button.Content = c;
+                button.Content = sudoku.GetValueAt(x, y);
                 elementGraphique = button;
             }
+
             Grid.SetRow(elementGraphique, x);
             Grid.SetColumn(elementGraphique, y);
             return elementGraphique;
@@ -133,7 +145,7 @@ namespace SudokuSolver
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void sudokuValueText(object sender, TextChangedEventArgs e) {
+        private void sudokuValueText(object sender, TextChangedEventArgs e) {
             TextBox textBox = (TextBox)sender;
             String value = textBox.Text;
             char key;
@@ -145,9 +157,19 @@ namespace SudokuSolver
                 if (!App.ViewModelSudoku.SelectedSudoku.Dictionary.Contains(key))
                     key = Char.ToUpper(key);
 
-                if (App.ViewModelSudoku.SelectedSudoku.Dictionary.Contains(key))
+                if (App.ViewModelSudoku.SelectedSudoku.Dictionary.Contains(key)) {
+
+
+                    //System.Windows.MessageBox.Show(Grid.GetRow(textBox) + ":" + Grid.GetColumn(textBox), "Information");
+
+                    App.ViewModelSudoku.SelectedSudoku.SetValueAt(Grid.GetRow(textBox), Grid.GetColumn(textBox), key);
                     textBox.Text = key + "";
-                else
+
+                    if (App.ViewModelSudoku.SelectedSudoku.Valid) {
+                        Reload_Selection();
+                    }
+
+                } else
                     textBox.Text = "";
 
                 textBox.CaretIndex = 1;

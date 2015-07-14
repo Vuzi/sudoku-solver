@@ -50,11 +50,15 @@ namespace SudokuSolver {
         public int squareSize { get; protected set; }
         public char[,] sudoku { get; protected set; }
         public bool valid { get; set; }
+
         private uint[,] sudokuValues;
         private Dictionary<uint, char> correspondances;
         private char jocker;
         private uint controlSum;
         private uint maxValue;
+        public uint[] lines { get; set; }
+        public uint[] cols { get; set; }
+        public uint[] squares { get; set; }
 
         /// <summary>
         /// Generated sudoku constructor 
@@ -145,6 +149,16 @@ namespace SudokuSolver {
                     sudokuValues[i, j] = (value << index);
                 }
             }
+        }
+
+        public void SetValueAt(int x, int y, char value) {
+            int pos = dictionnary.IndexOf(value);
+
+            if(pos < 0)
+                return;
+
+            sudoku[x, y] = value;
+            sudokuValues[x, y] =  (uint)(0x1 << pos);
         }
 
         /// <summary>
@@ -587,9 +601,31 @@ namespace SudokuSolver {
             return loadedSudokus;
         }
 
-        public uint[] lines { get; set; }
-        public uint[] cols { get; set; }
-        public uint[] squares { get; set; }
+        /// <summary>
+        /// Write the provided sudokus into the provided file
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="sudokuList"></param>
+        internal static void WriteToFile(string path, List<Sudoku> sudokuList) {
+
+            using (StreamWriter sr = new StreamWriter(path)) {
+
+                foreach (Sudoku sudoku in sudokuList) {
+                    sr.WriteLine("---------------------------------------");
+                    sr.WriteLine(sudoku.name);
+                    sr.WriteLine(sudoku.date.ToString());
+                    sr.WriteLine(sudoku.dictionnary);
+
+                    for (int i = 0; i < sudoku.size; i++) {
+                        for (int j = 0; j < sudoku.size; j++) {
+                            sr.Write(sudoku.sudoku[i, j]);
+                        }
+                        sr.WriteLine();
+                    }
+                }
+
+            }
+        }
     }
 }
 

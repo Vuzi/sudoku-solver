@@ -152,6 +152,14 @@ namespace SudokuSolver {
         }
 
         public void SetValueAt(int x, int y, char value) {
+            // Jocker
+            if (value == jocker) {
+                sudoku[x, y] = value;
+                sudokuValues[x, y] = 0x0;
+                return;
+            }
+
+            // Dictionary value
             int pos = dictionnary.IndexOf(value);
 
             if(pos < 0)

@@ -14,7 +14,7 @@ namespace SudokuSolver
         public bool Valid { get { return sudoku.valid; } }
         public String Name { get { return sudoku.name; } }
         public DateTime Date { get { return sudoku.date; } }
-        public String Dictionnary { get { return sudoku.dictionnary; } }
+        public String Dictionary { get { return sudoku.dictionnary; } }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -62,19 +62,18 @@ namespace SudokuSolver
         public void DeleteGrid()
         {
             if (SelectedSudoku == null)
-                System.Windows.MessageBox.Show("No item selected", "Info");
+                System.Windows.MessageBox.Show("Aucune grille selectionnée", "Information");
             else
                 SudokuList.Remove(SelectedSudoku);
         }
 
         public void ChargerFichier(String file)
         {
-            if (file == null) return;
+            if (file == null || file == "") return;
 
             try
             {
                 List<Sudoku> sudokuList = Sudoku.InitFromFile(file);
-                SudokuList.Clear();
 
                 foreach (Sudoku sudoku in sudokuList)
                 {
@@ -84,14 +83,14 @@ namespace SudokuSolver
             }
             catch (Exception)
             {
-                System.Windows.MessageBox.Show("The file is not valid", "Error");
+                System.Windows.MessageBox.Show("Le fichier est invalide", "Erreur au chargement du fichier");
             }
         }
 
         public void ResolveGrid()
         {
             if (SelectedSudoku == null)
-                System.Windows.MessageBox.Show("No item selected", "Info");
+                System.Windows.MessageBox.Show("Aucune grille selectionnée", "Information");
             else {
                 SelectedSudoku.Solve();
                 SelectedSudoku.Validate();
@@ -100,7 +99,7 @@ namespace SudokuSolver
 
         internal void ValidateGrid() {
             if (SelectedSudoku == null)
-                System.Windows.MessageBox.Show("No item selected", "Info");
+                System.Windows.MessageBox.Show("Aucune grille selectionnée", "Information");
             else {
                 SelectedSudoku.Validate();
             }

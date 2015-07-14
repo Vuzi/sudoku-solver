@@ -186,7 +186,7 @@ namespace SudokuSolver {
             }
 
             if (sudokuValues[x, y] != 0x0) // Value already present
-                return SolveInternal(x + 1, y);
+                return GenerateInternal(x + 1, y);
 
             int squarePos = ((x / squareSize) * squareSize) + (y / squareSize);
             uint value = lines[x] & cols[y] & squares[squarePos];
@@ -196,36 +196,35 @@ namespace SudokuSolver {
                 return false;
 
             // Generate all the possible values & shuffle
-            uint[] values = new uint[this.size];
+            List<uint> values = new List<uint>();
 
-            int pos = 0;
-            for (uint i = 0x1; i < maxValue; i <<= 1, pos++) {
-                values[pos] = i;
+            for (uint i = 0x1; i < maxValue; i <<= 1) {
+                if ((value & i) == i) {
+                    values.Add(i);
+                }
             }
 
             Random rnd = new Random();
-            values.OrderBy(a => rnd.Next());
+            var randomValues = values.OrderBy(a => rnd.Next());
 
             // Test recursively with each possible value
-            foreach (uint i in values) {
-                if ((value & i) == i) {
-                    // Update value
-                    sudokuValues[x, y] = i;
+            foreach (uint i in randomValues) {
+                // Update value
+                sudokuValues[x, y] = i;
 
-                    // Update possible values
-                    lines[x] ^= i;
-                    cols[y] ^= i;
-                    squares[squarePos] ^= i;
+                // Update possible values
+                lines[x] ^= i;
+                cols[y] ^= i;
+                squares[squarePos] ^= i;
 
-                    if (SolveInternal(x + 1, y)) {
-                        return true; // Solution working, quit
-                    }
-
-                    // Revert
-                    lines[x] |= i;
-                    cols[y] |= i;
-                    squares[squarePos] |= i;
+                if (GenerateInternal(x + 1, y)) {
+                    return true; // Solution working, quit
                 }
+
+                // Revert
+                lines[x] |= i;
+                cols[y] |= i;
+                squares[squarePos] |= i;
             }
 
             // No result found, revert

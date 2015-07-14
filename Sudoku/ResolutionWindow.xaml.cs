@@ -53,6 +53,11 @@ namespace SudokuSolver
             App.ViewModelSudoku.ExportAll(openFileDialog.FileName);
         }
 
+        private void Button_Clear_SudokuList(object sender, RoutedEventArgs e)
+        {
+            App.ViewModelSudoku.SudokuList.Clear();
+        }
+
         private void Button_Load_File(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new Microsoft.Win32.OpenFileDialog() { Filter = "Sudoku Files (*.sud, *.sudoku)|*.sud;*.sudoku|Text Files (*.txt)|*.txt|All Files (*.*)|*.*" };

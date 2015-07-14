@@ -55,7 +55,6 @@ namespace SudokuSolver
         private void ListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Reload_Selection();
-            
         }
 
         void Reload_Selection()
@@ -65,9 +64,15 @@ namespace SudokuSolver
             FrontGrid.ColumnDefinitions.Clear();
 
             Sudoku sudoku = App.ViewModelSudoku.SelectedSudoku;
-            if (sudoku == null) return;
-            sudoku.Validate();
 
+            if (sudoku == null)
+            {
+                buttonRemoveGrid.Visibility = Visibility.Hidden;
+                buttonResolveGrid.Visibility = Visibility.Hidden;
+                return;
+            }
+
+            sudoku.Validate();
             for (int i = 0; i < sudoku.size; i++)
             {
                 FrontGrid.RowDefinitions.Add(new RowDefinition());
@@ -82,6 +87,9 @@ namespace SudokuSolver
                     FrontGrid.Children.Add(elem);
                 }
             }
+
+            buttonRemoveGrid.Visibility = Visibility.Visible;
+            buttonResolveGrid.Visibility = Visibility.Visible;
         }
 
         private static FrameworkElement CreateGridCases(Sudoku sudoku, int x, int y)

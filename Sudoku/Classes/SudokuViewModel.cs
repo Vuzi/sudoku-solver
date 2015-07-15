@@ -80,7 +80,7 @@ namespace SudokuSolver
             ApplicationName = "SudokuSolver";
             SudokuList = new ObservableCollection<SudokuGridViewModel>();
         }
-
+        
         public void AddGrid(int size, int difficulty)
         {
             String dictionary = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";

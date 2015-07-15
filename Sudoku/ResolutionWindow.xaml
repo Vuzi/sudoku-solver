@@ -4,12 +4,13 @@
         Title="{Binding ApplicationName}" Height="871.069" Width="1296.698" Icon="sudoku_solver.ico">
     <Window.Resources>
         <Style x:Name="valueSudoku" TargetType="TextBox">
-            <Setter Property="Background" Value="#FF7494CA"/>
             <Setter Property="FontSize" Value="15px" />
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="White" />
         </Style>
         <Style x:Key="validSudoku" TargetType="Ellipse">
             <Style.Triggers>

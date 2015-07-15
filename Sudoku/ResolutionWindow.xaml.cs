@@ -129,9 +129,13 @@ namespace SudokuSolver
             sudokuInfoPanel.Visibility = Visibility.Visible;
         }
 
+        private int last = 0;
+
         private FrameworkElement CreateGridCases(SudokuGridViewModel sudoku, int x, int y)
         {
             FrameworkElement elementGraphique;
+
+            int colorValue = ((y / sudoku.sudoku.squareSize) + (x / sudoku.sudoku.squareSize)) % 2;
 
             if (sudoku.IsEditableAt(x, y)) {
                 TextBox value = new TextBox();
@@ -139,13 +143,39 @@ namespace SudokuSolver
                 value.Name = "valueSudoku";
                 elementGraphique = value;
 
+                if (colorValue == 0) {
+                    value.Background = new SolidColorBrush(Color.FromRgb(178, 201, 251));
+                } else {
+                    value.Background = new SolidColorBrush(Color.FromRgb(116, 148, 202));
+                }
+
                 if (sudoku.GetValueAt(x, y) != '.')
                     value.Text = sudoku.GetValueAt(x, y) + "";
+
+               // 0       1       2
+               // 0 1 2 | 3 4 5 | 6 7 8
 
             } else {
                 Button button = new Button();
                 button.Content = sudoku.GetValueAt(x, y);
                 elementGraphique = button;
+
+                if (colorValue != 0) {
+                    button.Background = new SolidColorBrush(Color.FromRgb(220, 220, 220));
+                }
+            }
+
+            // Add margin
+            if (y % sudoku.sudoku.squareSize == 0) {
+                var margin = elementGraphique.Margin;
+                margin.Left = 3.0;
+                elementGraphique.Margin = margin;
+            }
+
+            if (x % sudoku.sudoku.squareSize == 0) {
+                var margin = elementGraphique.Margin;
+                margin.Top = 3.0;
+                elementGraphique.Margin = margin;
             }
 
             Grid.SetRow(elementGraphique, x);

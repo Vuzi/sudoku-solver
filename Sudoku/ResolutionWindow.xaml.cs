@@ -178,6 +178,8 @@ namespace SudokuSolver
                     textBox.Text = "";
 
                 textBox.CaretIndex = 1;
+            } else {
+                App.ViewModelSudoku.SelectedSudoku.SetValueAt(Grid.GetRow(textBox), Grid.GetColumn(textBox), '.');
             }
         }
 

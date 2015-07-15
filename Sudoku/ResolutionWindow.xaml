@@ -71,6 +71,8 @@
 
         </StackPanel>
 
+        <Grid x:Name="HypothesisGrid" Margin="10,150,10,10" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.5,0.5"/>
+
         <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SudokuList.Name}"/>
         <ListBox Background="#FF232323" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" SelectionChanged="ListBox_OnSelectionChanged" SelectedItem="{Binding SelectedSudoku}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding SudokuList}" ToolTip="{Binding SudokuList.Count}" Margin="10,140,10,10">
             <ListBox.ItemTemplate>

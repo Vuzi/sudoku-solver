@@ -120,7 +120,11 @@ namespace SudokuSolver
             else
             {
                 buttonValidateGrid.Visibility = Visibility.Visible;
-                buttonResolveGrid.Visibility = Visibility.Visible;
+                
+                if (sudoku.Size == 25)
+                    buttonResolveGrid.Visibility = Visibility.Hidden;
+                else 
+                    buttonResolveGrid.Visibility = Visibility.Visible;
             }
             sudokuInfoPanel.Visibility = Visibility.Visible;
         }

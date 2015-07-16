@@ -66,6 +66,17 @@ namespace SudokuSolver
             sudoku.Validate();
             OnPropertyChanged("Valid");
         }
+
+        internal void Reset() {
+            for (int i = 0; i < sudoku.size; i++) {
+                for (int j = 0; j < sudoku.size; j++) {
+                    if (editableValues[i, j])
+                        sudoku.SetValueAt(i, j, '.');
+                }
+            }
+
+
+        }
     }
 
     public class SudokuViewModel

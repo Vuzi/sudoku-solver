@@ -35,9 +35,13 @@ namespace SudokuSolver
             generationWindow.Show();
         }
 
-        private void Button_Remove_Grid(object sender, RoutedEventArgs e)
-        {
+        private void Button_Remove_Grid(object sender, RoutedEventArgs e) {
             App.ViewModelSudoku.DeleteGrid();
+        }
+
+        private void Button_Empty_Grid(object sender, RoutedEventArgs e) {
+            App.ViewModelSudoku.SelectedSudoku.Reset();
+            Reload_Selection();
         }
 
         private void Button_Export(object sender, RoutedEventArgs e)
@@ -121,9 +125,9 @@ namespace SudokuSolver
             {
                 buttonValidateGrid.Visibility = Visibility.Visible;
                 
-                if (sudoku.Size == 25)
-                    buttonResolveGrid.Visibility = Visibility.Hidden;
-                else 
+                //if (sudoku.Size == 25)
+                //    buttonResolveGrid.Visibility = Visibility.Hidden;
+                //else 
                     buttonResolveGrid.Visibility = Visibility.Visible;
             }
             sudokuInfoPanel.Visibility = Visibility.Visible;
@@ -140,6 +144,14 @@ namespace SudokuSolver
             if (sudoku.IsEditableAt(x, y)) {
                 TextBox value = new TextBox();
                 value.TextChanged += sudokuValueText;
+
+                String valuePossible = "Valeurs possibles : ";
+
+                foreach(char c in sudoku.sudoku.GetPossibleValuesAt(x, y)) {
+                    valuePossible += " " + c;
+                }
+
+                value.ToolTip = valuePossible;
                 value.Name = "valueSudoku";
                 elementGraphique = value;
 

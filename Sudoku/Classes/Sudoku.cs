@@ -188,7 +188,24 @@ namespace SudokuSolver {
         /// </summary>
         private void Generate() {
             this.InitSolver();
-            this.GenerateInternal(0, 0);
+
+            if (this.size > 25)
+                this.size = 25;
+
+            if (size == 25)
+                this.GenerateInternalLarge();
+            else
+                this.GenerateInternal(0, 0);
+        }
+
+        /// <summary>
+        /// Generate large sudoku from templates
+        /// </summary>
+        private void GenerateInternalLarge() {
+            List<Sudoku> sudokus = Sudoku.InitFromFile("res/templates.sud");
+            Sudoku sudoku = sudokus[new Random().Next(sudokus.Count())];
+
+            this.sudokuValues = sudoku.sudokuValues;
         }
 
         /// <summary>

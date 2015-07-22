@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -72,14 +73,32 @@ namespace SudokuSolver
 
         private async void Button_Resolve_Grid(object sender, RoutedEventArgs e) {
 
+
+            Thread thread = null;
+
             // Start thread
-            var task = Task.Factory.StartNew(() => App.ViewModelSudoku.ResolveGrid());
+            var task = Task.Factory.StartNew(() =>
+            {
+                thread = Thread.CurrentThread;
+                App.ViewModelSudoku.ResolveGrid();
+            });
+
+            buttonResolveGrid.IsEnabled = false;
 
             if (await Task.WhenAny(task, Task.Delay(3000)) != task) {
-
+                if (thread != null)
+                {
+                    thread.Abort();
+                    Task.
+                }
+                buttonResolveGrid.IsEnabled = true;
                 MessageBoxResult rsltMessageBox = MessageBox.Show("Impossible de résoudre ce sudoku, sa complexité est trop importante", "Résolution suodoku", MessageBoxButton.OK, MessageBoxImage.Warning);
+                
             }
-
+            else
+            {
+                buttonResolveGrid.IsEnabled = true;
+            }
             Reload_Selection();
 
         }

@@ -70,18 +70,15 @@ namespace SudokuSolver
             App.ViewModelSudoku.ChargerFichier(openFileDialog.FileName);
         }
 
-        private async void Button_Resolve_Grid(object sender, RoutedEventArgs e)
-        {
-            if (App.ViewModelSudoku.SelectedSudoku.Size >= 25) {
-                // Start thread
-                var task = Task.Factory.StartNew(() => App.ViewModelSudoku.ResolveGrid());
+        private async void Button_Resolve_Grid(object sender, RoutedEventArgs e) {
 
-                if (await Task.WhenAny(task, Task.Delay(3000)) != task) {
+            // Start thread
+            var task = Task.Factory.StartNew(() => App.ViewModelSudoku.ResolveGrid());
 
-                    MessageBoxResult rsltMessageBox = MessageBox.Show("Impossible de résoudre ce sudoku, sa complexité est trop importante", "Résolution suodoku", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            } else
-                App.ViewModelSudoku.ResolveGrid();
+            if (await Task.WhenAny(task, Task.Delay(3000)) != task) {
+
+                MessageBoxResult rsltMessageBox = MessageBox.Show("Impossible de résoudre ce sudoku, sa complexité est trop importante", "Résolution suodoku", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
             Reload_Selection();
 

@@ -34,7 +34,7 @@ namespace SudokuSolver {
             SudokuDifficulty.Items.Add(new { Text = "2 - Facile",         Value = 20 });
             SudokuDifficulty.Items.Add(new { Text = "3 - Moyen",          Value = 35 });
             SudokuDifficulty.Items.Add(new { Text = "4 - Difficile",      Value = 60 });
-            SudokuDifficulty.Items.Add(new { Text = "3 - Très difficile", Value = 80 });
+            SudokuDifficulty.Items.Add(new { Text = "5 - Très difficile", Value = 80 });
             SudokuDifficulty.SelectedValue = SudokuDifficulty.Items[0];
         }
 

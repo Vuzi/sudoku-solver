@@ -399,12 +399,17 @@ namespace SudokuSolver {
         /// </summary>
         /// <returns>True if the sudoku can be (and is) solved, false otherwise</returns>
         public bool Solve() {
+            uint[,] savedValues = (uint[,]) this.sudokuValues.Clone();
+
             this.InitSolver();
 
             // Try the speed method
             if (SolveSpeed()) {
-                UpdateSudoku();
-                return true;
+                if (Validate() == null) {
+                    UpdateSudoku();
+                    return true;
+                } else
+                    goto revert;
             }
 
             // Try with hypothesis
@@ -412,6 +417,10 @@ namespace SudokuSolver {
                 UpdateSudoku();
                 return true;
             } else
+                goto revert;
+
+            revert:
+                this.sudokuValues = savedValues; // revert
                 return false;
         }
 

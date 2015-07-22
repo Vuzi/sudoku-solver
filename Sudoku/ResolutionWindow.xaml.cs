@@ -73,23 +73,27 @@ namespace SudokuSolver
 
         private async void Button_Resolve_Grid(object sender, RoutedEventArgs e) {
 
-
             Thread thread = null;
+            uint[,] oldValues = (uint[,]) App.ViewModelSudoku.SelectedSudoku.GetValuesBin().Clone();
 
             // Start thread
             var task = Task.Factory.StartNew(() =>
             {
-                thread = Thread.CurrentThread;
-                App.ViewModelSudoku.ResolveGrid();
+                thread = new Thread(() => 
+                {
+                    Thread.CurrentThread.IsBackground = true;
+                    App.ViewModelSudoku.ResolveGrid();
+                });
+                thread.Start();
+                thread.Join();
             });
 
             buttonResolveGrid.IsEnabled = false;
 
             if (await Task.WhenAny(task, Task.Delay(3000)) != task) {
-                if (thread != null)
-                {
-                    thread.Abort();
-                    Task.
+                if (thread != null) {
+                    thread.Abort(); // Abort resolution
+                    App.ViewModelSudoku.SelectedSudoku.SetValuesBin(oldValues);
                 }
                 buttonResolveGrid.IsEnabled = true;
                 MessageBoxResult rsltMessageBox = MessageBox.Show("Impossible de résoudre ce sudoku, sa complexité est trop importante", "Résolution suodoku", MessageBoxButton.OK, MessageBoxImage.Warning);

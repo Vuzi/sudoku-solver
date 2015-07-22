@@ -51,7 +51,7 @@ namespace SudokuSolver {
         public char[,] sudoku { get; protected set; }
         public bool valid { get; set; }
 
-        private uint[,] sudokuValues;
+        public uint[,] sudokuValues;
         private Dictionary<uint, char> correspondances;
         private char jocker;
         private uint controlSum;
@@ -172,7 +172,7 @@ namespace SudokuSolver {
         /// <summary>
         /// Update the values of the sudoku, according to the values of correspondances.
         /// </summary>
-        private void UpdateSudoku() {
+        public void UpdateSudoku() {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
                     if (sudokuValues[i, j] != 0x0)

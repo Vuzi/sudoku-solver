@@ -47,6 +47,10 @@ namespace SudokuSolver
             return sudoku.sudoku[x, y];
         }
 
+        public uint[,] GetValuesBin() {
+            return sudoku.sudokuValues;
+        }
+
         public void SetValueAt(int x, int y, char val) {
             sudoku.SetValueAt(x, y, val);
             Validate();
@@ -76,6 +80,11 @@ namespace SudokuSolver
             }
 
 
+        }
+
+        internal void SetValuesBin(uint[,] oldValues) {
+            sudoku.sudokuValues = oldValues;
+            sudoku.UpdateSudoku();
         }
     }
 
